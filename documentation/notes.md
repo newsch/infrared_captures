@@ -17,6 +17,7 @@ potential project name - Olin's Trees
 - [Public Lab's _Multispectral Imaging_ wiki page](https://publiclab.org/wiki/multispectral-imaging)
 - [William Scully's _Spectral Evidence_ project](http://www.scullyphotography.com/portfolio-ir.html)
 - [Raspberry Pi camera library documentation](https://picamera.readthedocs.io/)
+- [rpi2dng](http://bealecorner.org/best/RPi/) - potentially no longer relevant with new api
 
 ## Supplies
 - rpi
