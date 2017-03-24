@@ -1,6 +1,7 @@
 # Notes
 potential project name - Olin's Trees
 ## TODO
+- thinking about two possible paths forward: handheld and drone capture
 - rpi
   - update raspbian
   - learn more about not-quite-raw capture w/ rpi camera
