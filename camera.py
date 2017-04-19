@@ -5,7 +5,7 @@ from time import sleep
 
 
 def get_filename(base_string='IMG_',
-                 destination='DCIM/',
+                 destination='/home/pi/infrared_captures/DCIM/',
                  extension='.jpg'):
     """ Find a filename that won't overwrite existing art.
         Do this in a roudabout way of finding all the current art files that
@@ -35,7 +35,7 @@ def get_filename(base_string='IMG_',
         + '%04d' % bigger_int + extension
     return(an_uncontroversial_filename)
 
-def take_picture():
+def take_picture(stuff=None):
     print('Taking picture')
     GPIO.output(led_pin['green'], GPIO.LOW)
     GPIO.output(led_pin['red'], GPIO.HIGH)
@@ -46,18 +46,18 @@ def take_picture():
 # set up GPIO
 input_pin = {'shutter': 17,
              'toggle': 18,}
-led_pin = {'red: 21,
+led_pin = {'red': 24,
            'green': 22,
            'blue': 23,}
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin['shutter'], GPIO.IN, pull_up_or_down=GPIO.PUD_UP)
-GPIO.setup(pin['toggle'], GPIO.IN, pull_up_or_down=GPIO.PUD_UP)
-GPIO.setup(pin['red'], GPIO.OUT)
-GPIO.setup(pin['green'], GPIO.OUT)
-GPIO.setup(pin['blue'], GPIO.OUT)
+GPIO.setup(input_pin['shutter'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(input_pin['toggle'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(led_pin['red'], GPIO.OUT)
+GPIO.setup(led_pin['green'], GPIO.OUT)
+GPIO.setup(led_pin['blue'], GPIO.OUT)
 
-GPIO.add_event_detect(input_pin['shutter'], take_picture, debounce=200)
+GPIO.add_event_detect(input_pin['shutter'], GPIO.RISING, callback=take_picture, bouncetime=500)
 
 camera = PiCamera()
 
@@ -68,5 +68,5 @@ try:
     print('Cleaning up')
     GPIO.cleanup()
     print('Stopping camera')
-except KeyInterrupt:
+except KeyboardInterrupt:
     GPIO.cleanup()
