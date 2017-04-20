@@ -35,7 +35,7 @@ def get_filename(base_string='IMG_',
         + '%04d' % bigger_int + extension
     return(an_uncontroversial_filename)
 
-def take_picture(stuff=None):
+def take_picture(channel=None):
     print('Taking picture')
     GPIO.output(led_pin['green'], GPIO.LOW)
     GPIO.output(led_pin['red'], GPIO.HIGH)
